@@ -91,6 +91,12 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
   sendChildren?: any;
 
   disableSend?: boolean;
+
+  sendIconStyle?: StyleProp<ViewStyle>;
+
+  textInputWrapperStyle?: StyleProp<ViewStyle>;
+
+  textInputStyle?: StyleProp<TextStyle>;
 };
 
 export {

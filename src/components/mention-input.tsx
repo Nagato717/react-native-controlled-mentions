@@ -42,6 +42,12 @@ const MentionInput: FC<MentionInputProps> = (
 
     disableSend,
 
+    sendIconStyle,
+
+    textInputWrapperStyle,
+
+    textInputStyle,
+
     ...textInputProps
   },
 ) => {
@@ -147,13 +153,14 @@ const MentionInput: FC<MentionInputProps> = (
         .map(renderMentionSuggestions)
       }
 
-      <View style={styles.textInputWrapper}>
+      <View style={textInputWrapperStyle}>
         <TextInput
           {...textInputProps}
           ref={handleTextInputRef}
           multiline
           onChangeText={onChangeInput}
           onSelectionChange={handleSelectionChange}
+          style={textInputStyle}
         >
           <Text>
             {parts.map(({text, partType, data}, index) => partType ? (
@@ -172,7 +179,7 @@ const MentionInput: FC<MentionInputProps> = (
         <TouchableOpacity
           onPress={onPressSendComment}
           disabled={disableSend}
-          style={styles.sendIconWrapper}
+          style={sendIconStyle}
         >
           {sendChildren}
         </TouchableOpacity>
@@ -189,18 +196,5 @@ const MentionInput: FC<MentionInputProps> = (
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textInputWrapper: {
-    width: screenWidth,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: "rgb(70, 70, 70)",
-    flexDirection: 'row'
-  },
-  sendIconWrapper: {
-    flex: 1
-  }
-})
 
 export { MentionInput };
