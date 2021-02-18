@@ -85,6 +85,12 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
   inputRef?: Ref<TextInput>;
 
   containerStyle?: StyleProp<ViewStyle>;
+
+  onPressSendComment?: () => void;
+
+  sendChildren?: any;
+
+  disableSend?: boolean;
 };
 
 export {
