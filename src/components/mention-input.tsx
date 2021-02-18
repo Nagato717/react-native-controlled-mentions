@@ -5,6 +5,9 @@ import {
   TextInput,
   TextInputSelectionChangeEventData,
   View,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions
 } from 'react-native';
 
 import { MentionInputProps, MentionPartType, Suggestion } from '../types';
@@ -16,6 +19,9 @@ import {
   isMentionPartType,
   parseValue,
 } from '../utils';
+
+const { height, width } = Dimensions.get("window");
+const screenWidth = width > height ? height : width;
 
 const MentionInput: FC<MentionInputProps> = (
   {
@@ -29,6 +35,12 @@ const MentionInput: FC<MentionInputProps> = (
     containerStyle,
 
     onSelectionChange,
+
+    onPressSendComment,
+
+    sendChildren,
+
+    disableSend,
 
     ...textInputProps
   },
@@ -135,29 +147,36 @@ const MentionInput: FC<MentionInputProps> = (
         .map(renderMentionSuggestions)
       }
 
-      <TextInput
-        {...textInputProps}
+      <View style={styles.textInputWrapper}>
+        <TextInput
+          {...textInputProps}
+          ref={handleTextInputRef}
+          multiline
+          onChangeText={onChangeInput}
+          onSelectionChange={handleSelectionChange}
+        >
+          <Text>
+            {parts.map(({text, partType, data}, index) => partType ? (
+              <Text
+                key={`${index}-${data?.trigger ?? 'pattern'}`}
+                style={partType.textStyle ?? defaultMentionTextStyle}
+              >
+                {text}
+              </Text>
+            ) : (
+              <Text key={index}>{text}</Text>
+            ))}
+          </Text>
+        </TextInput>
 
-        ref={handleTextInputRef}
-
-        multiline
-
-        onChangeText={onChangeInput}
-        onSelectionChange={handleSelectionChange}
-      >
-        <Text>
-          {parts.map(({text, partType, data}, index) => partType ? (
-            <Text
-              key={`${index}-${data?.trigger ?? 'pattern'}`}
-              style={partType.textStyle ?? defaultMentionTextStyle}
-            >
-              {text}
-            </Text>
-          ) : (
-            <Text key={index}>{text}</Text>
-          ))}
-        </Text>
-      </TextInput>
+        <TouchableOpacity
+          onPress={onPressSendComment}
+          disabled={disableSend}
+          style={styles.sendIconWrapper}
+        >
+          {sendChildren}
+        </TouchableOpacity>
+      </View>
 
       {(partTypes
         .filter(one => (
@@ -170,5 +189,18 @@ const MentionInput: FC<MentionInputProps> = (
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  textInputWrapper: {
+    width: screenWidth,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: "rgb(70, 70, 70)",
+    flexDirection: 'row'
+  },
+  sendIconWrapper: {
+    flex: 1
+  }
+})
 
 export { MentionInput };

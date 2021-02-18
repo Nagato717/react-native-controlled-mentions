@@ -4,7 +4,7 @@ import { StyleProp, TextStyle } from 'react-native';
 import matchAll from 'string.prototype.matchall';
 import { MentionData, MentionPartType, Part, PartType, Position, RegexMatchResult, Suggestion } from '../types';
 
-const mentionRegEx = /(?<original>(?<trigger>.)\[(?<name>[^[]*)]\((?<id>[^(]*)\))/gi;
+const mentionRegEx = /(?<original>(?<trigger>.)\[(?<name>[^[]*)]\(id:(?<id>[^(]*)\))/gi;
 
 const defaultMentionTextStyle: StyleProp<TextStyle> = {fontWeight: 'bold', color: 'blue'};
 
@@ -330,7 +330,7 @@ const generateRegexResultPart = (partType: PartType, result: RegexMatchResult, p
  * @param trigger
  * @param suggestion
  */
-const getMentionValue = (trigger: string, suggestion: Suggestion) => `${trigger}[${suggestion.name}](${suggestion.id})`;
+const getMentionValue = (trigger: string, suggestion: Suggestion) => `${trigger}[${suggestion.name}](id:${suggestion.id})`;
 
 /**
  * Recursive function for deep parse MentionInput's value and get plainText with parts
