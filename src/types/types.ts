@@ -98,7 +98,7 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
 
   textInputStyle?: StyleProp<TextStyle>;
 
-  testingGetListMentioned?: any
+  updateListMentioned?: (suggestion?: any) => void 
 };
 
 export {
