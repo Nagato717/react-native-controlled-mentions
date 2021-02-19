@@ -97,6 +97,8 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
   textInputWrapperStyle?: StyleProp<ViewStyle>;
 
   textInputStyle?: StyleProp<TextStyle>;
+
+  testingGetListMentioned?: any
 };
 
 export {

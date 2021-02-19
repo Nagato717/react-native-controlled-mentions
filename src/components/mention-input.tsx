@@ -48,6 +48,8 @@ const MentionInput: FC<MentionInputProps> = (
 
     textInputStyle,
 
+    testingGetListMentioned,
+
     ...textInputProps
   },
 ) => {
@@ -106,6 +108,8 @@ const MentionInput: FC<MentionInputProps> = (
     }
 
     onChange(newValue);
+
+    testingGetListMentioned(newValue)
 
     /**
      * Move cursor to the end of just added mention starting from trigger string and including:
