@@ -109,7 +109,7 @@ const MentionInput: FC<MentionInputProps> = (
 
     onChange(newValue);
 
-    testingGetListMentioned(newValue)
+    testingGetListMentioned(newValue, plainText, parts, selection, mentionType, suggestion)
 
     /**
      * Move cursor to the end of just added mention starting from trigger string and including:
