@@ -4,6 +4,7 @@ import { StyleProp, TextInput, TextInputProps, TextStyle, ViewStyle } from 'reac
 type Suggestion = {
   id: string;
   name: string;
+  avatar: string;
 };
 
 type MentionData = {
@@ -98,7 +99,7 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
 
   textInputStyle?: StyleProp<TextStyle>;
 
-  updateListMentioned?: (suggestion?: any) => void 
+  updateListMentioned?: any;
 };
 
 export {
